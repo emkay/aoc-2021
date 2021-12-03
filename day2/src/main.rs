@@ -14,15 +14,19 @@ fn main() {
 
     let mut horizontal_pos = 0;
     let mut depth_pos = 0;
+    let mut aim = 0;
 
     for item in v.iter() {
         let command = item[0];
         let value = item[1].parse::<u32>().unwrap();
 
         match command {
-            "forward" => horizontal_pos += value,
-            "down" => depth_pos += value,
-            "up" => depth_pos -= value,
+            "forward" => {
+                horizontal_pos += value;
+                depth_pos += aim * value;
+            },
+            "down" => aim += value,
+            "up" => aim -= value,
             _ => panic!("nope")
         }
     }
